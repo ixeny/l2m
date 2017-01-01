@@ -33,12 +33,8 @@ OPERATOR [+\-/*]
 
 \^ 	return POW;
 
-\\sum	{yylval = strdup("&Sum;");
-	return SUM;
-	}
-\\prod	{yylval = strdup("&prod;");
-	return PROD;
-	}
+\\sum	{yylval = strdup("&Sum;");return SUM;}
+\\prod	{yylval = strdup("&prod;");return PROD;}
 
 \\sqrt	{yylval = strdup(yytext); return SQRT;}
 
