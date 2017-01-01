@@ -5,3 +5,10 @@ m2l.tab.c
 m2l.tab.h
 m2l.tab.o
 m2l
+
+rapport/rapport.aux
+rapport/rapport.log
+rapport/rapport.out
+rapport/rapport.synctex.gz
+rapport/rapport.toc
+

@@ -1,0 +1,78 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{titlecaps}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{wrapfig}
+
+\usepackage[french]{nomencl}
+\usepackage{french}
+\usepackage{listings}
+\usepackage{verbatim}
+\usepackage{hyperref} 
+\usepackage{pdfpages}
+\usepackage{fancyhdr}
+
+\usepackage{color}
+\definecolor{lightgray}{rgb}{.9,.9,.9}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+\lstset{
+	language=C,
+	backgroundcolor=\color{lightgray},
+	extendedchars=true,
+	basicstyle=\footnotesize\ttfamily,
+	showstringspaces=false,
+	showspaces=false,
+	numbers=left,
+	numberstyle=\footnotesize,
+	numbersep=9pt,
+	tabsize=2,
+	breaklines=true,
+	showtabs=false,
+	captionpos=b
+}
+
+
+\author{
+	Boubekri, Abdelmalek \     \texttt{abdelmalek.boubekri@etu.univ-rouen.fr}
+	\and
+	Mezheri, Bilal\   		   \texttt{bilal.mezheri@etu.univ-rouen.fr}
+}
+
+
+\title{	Université de Rouen, UFR Sciences et Techniques\\
+		Master 1 SSI – Compilation\\
+		M2L, traducteur \LaTeX en MathML\\ }
+
+
+\begin{document}
+	
+	\maketitle
+	\tableofcontents
+
+\section{Grammaire}
+
+FORMULE 	$\rightarrow$ \textbackslash sqrt RACINE | FRACTION \\
+ 
+ | UNDEROVER\_\{FORMULE\} $\wedge$ \{FORMULE\} | CARACTERE\\
+ 
+RACINE		$\rightarrow$ [FORMULE]\{FORMULE\} | \{FORMULE\}\\
+
+FRACTION	$\rightarrow$ \textbackslash frac\{FORMULE\}\{FORMULE\}\\
+
+UNDEROVER	$\rightarrow$ \textbackslash sum | \textbackslash prod \\
+
+CARACTERE	$\rightarrow$ IDENTIFIER | OPERATOR | NUMBER\\
+ | \textbackslash pm | \textbackslash alpha | \textbackslash beta | \textbackslash infty |  \textbackslash mp | \textbackslash cap | \textbackslash cup | $\wedge$ | \_ | \textbackslash subset  | \textbackslash supset  | \textbackslash subseteq | \textbackslash supseteq
+
+	
+	
+\end{document}

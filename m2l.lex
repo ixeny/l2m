@@ -31,7 +31,7 @@ OPERATOR [+\-/*]
 
 \_ 	return INF;
 
-\^ 	return SUP;
+\^ 	return POW;
 
 \\sum	{yylval = strdup("&Sum;");
 	return SUM;
@@ -50,6 +50,11 @@ OPERATOR [+\-/*]
 
 \\cap	{yylval = strdup("&cap;"); return CAP;}
 \\cup	{yylval = strdup("&cup;"); return CUP;}
+\\subset {yylval = strdup("&sub;"); return SUB;}
+\\supset {yylval = strdup("&sup;"); return SUP;}
+\\subseteq {yylval = strdup("&sube;"); return SUBE;}
+\\supseteq {yylval = strdup("&supe;"); return SUPE;}
+
 
 \[	return '[';
 \]	return ']';
