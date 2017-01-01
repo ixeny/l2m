@@ -56,7 +56,7 @@ char str[1024];
 %left OPERATOR
 %%
 
-ligne   : ligne formule '\n'{printf("%s\n%s\n %s %s\n%s\n", MATHO, RWO, $2,RWC, MATHC);}
+ligne   : DOLLAR ligne formule DOLLAR '\n'{printf("%s\n%s\n %s %s\n%s\n", MATHO, RWO, $3,RWC, MATHC);}
 	| ligne '\n'
 	|
 	;

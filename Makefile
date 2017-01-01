@@ -6,20 +6,20 @@ CFLAGS=-std=c99 -pedantic -Wall
 LDFLAGS=-lfl -lm
 LFLAGS=-D_POSIX_SOURCE -DYY_NO_INPUT --nounput
 
-m2l: lex.yy.o m2l.tab.o
+l2m: lex.yy.o l2m.tab.o
 	$(CC) $+ -o $@ $(LDFLAGS)
 
-lex.yy.c: m2l.lex m2l.tab.h
+lex.yy.c: l2m.lex l2m.tab.h
 	$(LEX) $(LFLAGS) $<
 
-lex.yy.h: m2l.lex
+lex.yy.h: l2m.lex
 	$(LEX) --header-file=$@ $(LFLAGS) $<
 
-m2l.tab.c m2l.tab.h: m2l.y lex.yy.h
+l2m.tab.c l2m.tab.h: l2m.y lex.yy.h
 	$(YACC) $< -d
 
 %.o: %.c
 	$(CC) $(CFLAGS) $< -c
 
 clean:
-	-rm m2l *.o lex.yy.* m2l.tab.*
+	-rm l2m *.o lex.yy.* l2m.tab.*
