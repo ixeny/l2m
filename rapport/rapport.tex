@@ -56,10 +56,24 @@
 	\newpage
 
 \section{Introduction}
-Le projet consiste à réaliser un traducteur \LaTeX en MathML, le programme devra prendre les formules entourées du symbole \$ et produire le code MathML correspondant, et doit prendre en compte les opérateurs, identifiants, les constantes numériques, 
+Le projet consiste à réaliser un traducteur \LaTeX en MathML, le programme devra prendre les formules entourées du symbole \$ et produire le code MathML correspondant; et doit prendre en compte:
+\begin{itemize}
+	\item les opérateurs;
+	\item les identifiants;
+	\item les constantes numériques;
+	\item les fractions;
+	\item les exposants et indices;
+	\item les racines (sqrt et root);
+	\item le groupement avec accolades;
+	\item la somme et le produit itérés;
+\end{itemize}
+
+et tout ça sera integré à un service web, idéalement la lecture et la sortie se feront sur l'entrée et la sortie standard.
 
 \section{Grammaire}
 \begin{tabbing}
+AXIOME $\rightarrow$ \$ FORMULE \$\\
+
 FORMULE 	$\rightarrow$\= \textbackslash sqrt RACINE FORMULE\\
 	\>|\textbackslash frac FRACTION FORMULE\\
 	\>| UNDEROVER FORMULE\\
@@ -93,6 +107,15 @@ CARACTERE	$\rightarrow$ IDENTIFIER | OPERATOR | NUMBER\\
 \end{tabbing}
 
 
+\section{Fonctionnement }
+\subsection{Analyse lexicale avec Flex}
+
+Le rôle de Flex est de découper la chaine entrée en lexèmes (tokenizer) à reconnus grâce aux  motifs définis, dans notre exemple les nombres, les identifiants \ldots ; puis les communique à Yacc
+
+
+\subsection{Analyse syntaxique avec Yacc}
+Yacc quant à lui,  permet de vérifier la syntaxe de la chaine de caractères à travers la grammaire décrite précédement, puis d'afficher le résultat en MathML.
+
 
 \section{Utilisation}
 
@@ -102,7 +125,7 @@ Afin de compiler le programme il suffit de lancer le \textbf{Makefile}
 \begin{lstlisting}[language=Bash]
 Make
 \end{lstlisting}
-Puis vous pourrez lancer le programme \textbf{l2m} avec comme argument le flux \LaTeX, exemple:
+Puis vous pourrez lancer le programme \textbf{l2m} avec comme argument le flux \LaTeX; exemple:
 
 \begin{lstlisting}[language=Bash]
 ./l2m "\$\frac{5}{9}$"
