@@ -44,12 +44,12 @@ OPERATOR [+\-/*]
 
 \\infty	{yylval = strdup("&infin;"); return INFINITY;}
 
-\\cap	{yylval = strdup("&cap;"); return CAP;}
-\\cup	{yylval = strdup("&cup;"); return CUP;}
-\\subset {yylval = strdup("&sub;"); return SUB;}
-\\supset {yylval = strdup("&sup;"); return SUP;}
-\\subseteq {yylval = strdup("&sube;"); return SUBE;}
-\\supseteq {yylval = strdup("&supe;"); return SUPE;}
+\\cap	{yylval = strdup("<mo> &cap; </mo>"); return CAP;}
+\\cup	{yylval = strdup("<mo> &cup; </mo>"); return CUP;}
+\\subset {yylval = strdup("<mo> &sub; </mo>"); return SUB;}
+\\supset {yylval = strdup("<mo> &sup; </mo>"); return SUP;}
+\\subseteq {yylval = strdup("<mo> &sube; </mo>"); return SUBE;}
+\\supseteq {yylval = strdup("<mo> &supe; </mo>"); return SUPE;}
 
 
 \[	return '[';

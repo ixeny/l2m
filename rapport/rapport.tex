@@ -31,9 +31,6 @@
 	basicstyle=\footnotesize\ttfamily,
 	showstringspaces=false,
 	showspaces=false,
-	numbers=left,
-	numberstyle=\footnotesize,
-	numbersep=9pt,
 	tabsize=2,
 	breaklines=true,
 	showtabs=false,
@@ -56,24 +53,67 @@
 \begin{document}
 	
 	\maketitle
+	\newpage
 
-Récupérez l'archive depuis Github: https://github.com/kabyliano/l2m.git
+\section{Introduction}
+Le projet consiste à réaliser un traducteur \LaTeX en MathML, le programme devra prendre les formules entourées du symbole \$ et produire le code MathML correspondant, et doit prendre en compte les opérateurs, identifiants, les constantes numériques, 
 
-\section*{Grammaire}
+\section{Grammaire}
+\begin{tabbing}
+FORMULE 	$\rightarrow$\= \textbackslash sqrt RACINE FORMULE\\
+	\>|\textbackslash frac FRACTION FORMULE\\
+	\>| UNDEROVER FORMULE\\
+	\>| CARACTERE FORMULE\\
+	\>| OPERATION FORMULE\\
+	\>| $\epsilon$ \\
 
-FORMULE 	$\rightarrow$ \textbackslash sqrt RACINE | FRACTION \\
- 
- | UNDEROVER\_\{FORMULE\} $\wedge$ \{FORMULE\} | CARACTERE\\
- 
-RACINE		$\rightarrow$ [FORMULE]\{FORMULE\} | \{FORMULE\}\\
+RACINE	~~~~$\rightarrow$ [FORMULE]\{FORMULE\} \\
+		\>| \{FORMULE\}\\
 
-FRACTION	$\rightarrow$ \textbackslash frac\{FORMULE\}\{FORMULE\}\\
+\linebreak
 
-UNDEROVER	$\rightarrow$ \textbackslash sum | \textbackslash prod \\
+FRACTION	$\rightarrow$ \{FORMULE\}\{FORMULE\}\\
+
+\linebreak
+
+OPERATION	$\rightarrow$ $\wedge$ FORMULE\\
+		\>| \_ FORMULE\\
+
+\linebreak
+
+UNDEROVER	$\rightarrow$ \textbackslash sum\_\{FORMULE\} $\wedge$ \{FORMULE\} \\
+		\>| \textbackslash prod\_\{FORMULE\} $\wedge$ \{FORMULE\} \\
+
+\linebreak
 
 CARACTERE	$\rightarrow$ IDENTIFIER | OPERATOR | NUMBER\\
- | \textbackslash pm | \textbackslash alpha | \textbackslash beta | \textbackslash infty |  \textbackslash mp | \textbackslash cap | \textbackslash cup | $\wedge$ | \_ | \textbackslash subset  | \textbackslash supset  | \textbackslash subseteq | \textbackslash supseteq
+ \>| \textbackslash pm | \textbackslash alpha | \textbackslash beta | \textbackslash infty |  \textbackslash mp \\
+ \>| \textbackslash cap | \textbackslash cup  | \textbackslash subset  | \textbackslash supset  | \textbackslash subseteq | \textbackslash supseteq
 
+\end{tabbing}
+
+
+
+\section{Utilisation}
+
+Récupérez l'archive depuis Github: https://github.com/kabyliano/l2m.git
+Afin de compiler le programme il suffit de lancer le \textbf{Makefile}
+
+\begin{lstlisting}[language=Bash]
+Make
+\end{lstlisting}
+Puis vous pourrez lancer le programme \textbf{l2m} avec comme argument le flux \LaTeX, exemple:
+
+\begin{lstlisting}[language=Bash]
+./l2m "\$\frac{5}{9}$"
+\end{lstlisting}
+
+\section{Problèmes non résolus}
+\begin{itemize}
+	\item Ereur de segmentation (core dumped) dû à la mauvaise gestion de la mémoire.
+	\item Récursivité mal implémentée.
+	\item Conflit Décalage/Réduction (\textit{Shift/reduce}) dû aux conflits entre \_ et $\wedge$ (POW / UND) et SUM / PROD.
+\end{itemize}
 
 	
 \end{document}
