@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "m2l.tab.h"
+#include "l2m.tab.h"
 
 %}
 DIGIT [0-9]
@@ -29,7 +29,7 @@ OPERATOR [+\-/*]
 
 \\beta	{yylval = strdup("&beta;"); return BETA;}
 
-\_ 	return INF;
+\_ 	return UND;
 
 \^ 	return POW;
 
@@ -65,4 +65,24 @@ OPERATOR [+\-/*]
 
 . {}
 %%
+void yyerror(const char *s) {
+	fprintf(stderr,"%s\n", s);
+}
+
+
+int main(int argc, char** argv) {
+	if (argc != 2) {
+		fprintf(stderr, "Mettez en argument le flux contenant la formule LaTeX\n");
+		exit(1);
+	}
+	yy_scan_string(argv[1]);
+	yyparse();	
+	return 0;
+}
+
+
+
+
+
+
 
