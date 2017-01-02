@@ -110,11 +110,26 @@ CARACTERE	$\rightarrow$ IDENTIFIER | OPERATOR | NUMBER\\
 \section{Fonctionnement }
 \subsection{Analyse lexicale avec Flex}
 
-Le rôle de Flex est de découper la chaine entrée en lexèmes (tokenizer) à reconnus grâce aux  motifs définis, dans notre exemple les nombres, les identifiants \ldots ; puis les communique à Yacc
+Le rôle de Flex est de découper la chaine entrée en lexèmes (tokenizer) à reconnus grâce aux  motifs définis, dans notre exemple les nombres, les identifiants \ldots , avant de procéder à l'analyse syntaxique.
+
+\paragraph{Exemple}
+petit fragment du fichier \textbf{l2m.lex}
+
+\begin{lstlisting}[language=C]
+/* La partie declaration Flex ou sont decrits les patrons */
+DIGIT [0-9]
+NUMBER {DIGIT}*|{DIGIT}*"."{DIGIT}*
+
+%%
+
+/* assigne la valeur du token lu a yyval, et retourne son type */
+{NUMBER} { yylval = strdup(yytext); return NUMBER;}
+
+\end{lstlisting}
 
 
 \subsection{Analyse syntaxique avec Yacc}
-Yacc quant à lui,  permet de vérifier la syntaxe de la chaine de caractères à travers la grammaire décrite précédement, puis d'afficher le résultat en MathML.
+Yacc se charge de la vérification de la syntaxe de la chaine de caractères à travers la grammaire décrite précédement et implémentée dans le fichier \textbf{l2m.y} , puis d'afficher le résultat en MathML.
 
 
 \section{Utilisation}
